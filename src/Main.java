@@ -1,5 +1,7 @@
 package chatbot;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,11 +10,9 @@ public class Main {
     public static ArrayList<String> keywords = new ArrayList<>();
 
     public static void main(String[] args) {
-        // keywords için eleman eklemeleri
-        keywords.add("kaç");
-
         // Bot sınıfında yazılan metodlar bot değişkeni üzerinden çalıştırılacak
         Bot bot = new Bot();
+        createKeywords();
 
         // konsoldan okumalar
         Scanner input = new Scanner(System.in);
@@ -31,6 +31,22 @@ public class Main {
             bot.botSay(bot.answer(words));
             System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
             girdi = input.nextLine();
+        }
+    }
+
+    //keyword kelimeleri dosyadan okuyup arrayliste atan metod
+    private static void createKeywords(){
+        Scanner scan = null;
+        try {
+            scan = new Scanner(new FileInputStream("keywords.txt"));
+        }catch (FileNotFoundException e){
+            System.err.println("Dosya bulunamadı.");
+        }
+
+        String read;
+        while(scan.hasNextLine()){
+            read = scan.nextLine();
+            keywords.add(read);
         }
     }
 }
