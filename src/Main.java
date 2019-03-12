@@ -23,12 +23,13 @@ public class Main {
         System.out.println("You: " + girdi);
 
         //girilen cümleyi kelime kelime ayırıyor
-        ArrayList<String> words = bot.parse(girdi);
+       // ArrayList<String> words = bot.regexGenerator(girdi);
 
         //kullanıcı çıkış yapmak isteyene kadar uygulamayı açık tutan döngü
         while(girdi.compareTo("0")!=0) {
             //uygulamanın verdiği cevaplar answer metodunda ayarlanacak
-            bot.botSay(bot.answer(words));
+        //    bot.botSay(bot.answer(words));
+            bot.answer(girdi);
             System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
             girdi = input.nextLine();
         }
@@ -38,7 +39,7 @@ public class Main {
     private static void createKeywords(){
         Scanner scan = null;
         try {
-            scan = new Scanner(new FileInputStream("keywords.txt"));
+            scan = new Scanner(new FileInputStream("C://Users//metal//IdeaProjects//SADProje//keywords.txt"));
         }catch (FileNotFoundException e){
             System.err.println("Dosya bulunamadı.");
         }
@@ -46,7 +47,7 @@ public class Main {
         String read;
         while(scan.hasNextLine()){
             read = scan.nextLine();
-            keywords.add(read);
+            keywords.add("\\s"+read+"\\s");
         }
     }
 }
