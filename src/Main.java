@@ -1,5 +1,6 @@
 package chatbot;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,46 +9,62 @@ import java.util.Scanner;
 public class Main {
     // input olarak girilebilecek keyword için açılmış arraylist
     public static ArrayList<String> keywords = new ArrayList<>();
+    private static Scanner scanner = null;
 
     public static void main(String[] args) {
         // Bot sınıfında yazılan metodlar bot değişkeni üzerinden çalıştırılacak
+        //readCSV();
         Bot bot = new Bot();
         createKeywords();
 
         // konsoldan okumalar
-        Scanner input = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
-        String girdi = input.nextLine(); //nextLine yerine next metodu kullanıldığında uygulama bozuluyor
+        String girdi = scanner.nextLine(); //nextLine yerine next metodu kullanıldığında uygulama bozuluyor
 
         // arayüz için yazılmış bir satır
         System.out.println("You: " + girdi);
 
         //girilen cümleyi kelime kelime ayırıyor
-       // ArrayList<String> words = bot.regexGenerator(girdi);
+        ArrayList<String> words = bot.regexGenerator(girdi);
 
         //kullanıcı çıkış yapmak isteyene kadar uygulamayı açık tutan döngü
         while(girdi.compareTo("0")!=0) {
             //uygulamanın verdiği cevaplar answer metodunda ayarlanacak
-        //    bot.botSay(bot.answer(words));
-            bot.answer(girdi);
+            bot.botSay(bot.answer(words));
+            //bot.answer(girdi);
             System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
-            girdi = input.nextLine();
+            girdi = scanner.nextLine();
         }
     }
 
     //keyword kelimeleri dosyadan okuyup arrayliste atan metod
     private static void createKeywords(){
-        Scanner scan = null;
         try {
-            scan = new Scanner(new FileInputStream("C://Users//metal//IdeaProjects//SADProje//keywords.txt"));
+            scanner = new Scanner(new FileInputStream("keywords.txt"));
         }catch (FileNotFoundException e){
             System.err.println("Dosya bulunamadı.");
+            e.printStackTrace();
         }
 
         String read;
-        while(scan.hasNextLine()){
-            read = scan.nextLine();
-            keywords.add("\\s"+read+"\\s");
+        assert scanner != null;
+        while(scanner.hasNextLine()){
+            read = scanner.nextLine();
+            keywords.add(read);
         }
+    }
+
+    private static void readCSV(){
+        try {
+            scanner = new Scanner(new File("atp_players.csv"));
+        } catch (FileNotFoundException e) {
+            System.err.println("Dosya bulunamadı.");
+            e.printStackTrace();
+        }
+        scanner.useDelimiter(",");
+        //okunan dosya kullanilan veri yapisine aktarilacak
+        //ancak scanner ile dosyanın sonuna kadar okumadi
+        //veri dosyamiz çok buyuk
     }
 }
