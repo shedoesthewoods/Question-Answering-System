@@ -1,6 +1,5 @@
 package chatbot;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -13,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
         // Bot sınıfında yazılan metodlar bot değişkeni üzerinden çalıştırılacak
-        //readCSV();
         Bot bot = new Bot();
         createKeywords();
 
@@ -21,24 +19,18 @@ public class Main {
         scanner = new Scanner(System.in);
         System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
         String girdi = scanner.nextLine(); //nextLine yerine next metodu kullanıldığında uygulama bozuluyor
-
-        // arayüz için yazılmış bir satır
-        System.out.println("You: " + girdi);
-
-        //girilen cümleyi kelime kelime ayırıyor
-        ArrayList<String> words = bot.regexGenerator(girdi);
+        bot.regexGenerator(girdi);
 
         //kullanıcı çıkış yapmak isteyene kadar uygulamayı açık tutan döngü
         while(girdi.compareTo("0")!=0) {
             //uygulamanın verdiği cevaplar answer metodunda ayarlanacak
-            bot.botSay(bot.answer(words));
-            //bot.answer(girdi);
+            bot.botSay(bot.answer());
             System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
             girdi = scanner.nextLine();
         }
     }
 
-    //keyword kelimeleri dosyadan okuyup arrayliste atan metod
+    /**keyword kelimeleri dosyadan okuyup arrayliste atan metod*/
     private static void createKeywords(){
         try {
             scanner = new Scanner(new FileInputStream("keywords.txt"));
@@ -53,18 +45,5 @@ public class Main {
             read = scanner.nextLine();
             keywords.add(read);
         }
-    }
-
-    private static void readCSV(){
-        try {
-            scanner = new Scanner(new File("atp_players.csv"));
-        } catch (FileNotFoundException e) {
-            System.err.println("Dosya bulunamadı.");
-            e.printStackTrace();
-        }
-        scanner.useDelimiter(",");
-        //okunan dosya kullanilan veri yapisine aktarilacak
-        //ancak scanner ile dosyanın sonuna kadar okumadi
-        //veri dosyamiz çok buyuk
     }
 }

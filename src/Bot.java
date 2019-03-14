@@ -5,16 +5,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Bot{
-	// şimdilik burada yapılacak bir şey yok
+    private ArrayList<String> matchingWords = new ArrayList<>();
 	Bot(){ }
 
-	// botun verdiği cevabı yazdıran metod
+	/** botun verdiği cevabı yazdıran metod*/
 	void botSay(String str){
 		System.out.println("Bot: " + str +"\n");
 	}
 
-    ArrayList<String> regexGenerator(String sentence){
-        ArrayList<String> matchingWords = new ArrayList<>();
+    void regexGenerator(String sentence){
         Pattern pattern;
         Matcher matcher;
         for (String word : Main.keywords) {
@@ -25,21 +24,18 @@ class Bot{
                 matchingWords.add(word);
            }
         }
-        return matchingWords;
     }
 
-    // uygulamanın vereceği cevap seçiminin yapılacağı metod
-    String answer(ArrayList<String> words){
-	    String ans = "";
-	    //duzenlenecek
-        for (String s :words) {
-            if(s.equalsIgnoreCase("en iyi") || s.equalsIgnoreCase("erkek")){
-                ans = "Djokovic";
-            }
-            else if(s.equalsIgnoreCase("kadin")){
-                ans = "Serena Williams";
-            }
+    /** uygulamanın vereceği cevap seçiminin yapılacağı metod*/
+    String answer(){
+	    String ans;
+
+        if(matchingWords.contains("en iyi") || matchingWords.contains("erkek")){
+            ans = "Djokovic";
+        }else{
+            ans = "Serena Williams";
         }
+        matchingWords.clear();
 	    return ans;
     }
 }
