@@ -1,34 +1,78 @@
 package chatbot;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.sql.*;
 
-public class ReadCSV {
-    private Scanner scanner = null;
+   public class ReadCSV {
+	   //JDBC driver adi and veritabani URL
+	   static final String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";  
+	   static final String DB_URL = "jdbc:sqlserver://LAPTOP-RKHJINC7:1433;DatabaseName=QuestionAnswering"; 
+	   
+	   //Veritabani baglantisi
+	   static final String USER = "sa";
+	   static final String PASS = "limonata";
+		
+	   Connection conn = null;
+	   Statement stmt = null;
+	   
+	   
+	   ReadCSV(){
+	    	
+	    }
+    
+	   void read() {
+		   
+		   try{
+	   
+		     //JDBC driver
+		      Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-    ReadCSV(){
+		      //Baglanti acma
+		      conn = DriverManager.getConnection(DB_URL, USER, PASS);
+		    
+		      
+		      //Sorgu calistirma
+		      stmt = conn.createStatement();
 
-    }
-
-    private void readCSV(){
-        try {
-            scanner = new Scanner(new File("atp_players.csv"));
-        } catch (FileNotFoundException e) {
-            System.err.println("Dosya bulunamadı.");
-            e.printStackTrace();
-        }
-        scanner.useDelimiter(",");
-        while (scanner.hasNextLine()){
-            scanner.nextLine();
-        }
-        //okunan dosya kullanilan veri yapisine aktarilacak
-        //ancak scanner ile dosyanın sonuna kadar okumadi
-        //veri dosyamiz çok buyuk
-    }
-
-    void arrayCreator(String line){
-
-    }
+		      String sql = "Select Id, Name,Lastname,Hand,Birthday,Country From atp_players;";
+		      ResultSet rs = stmt.executeQuery(sql);
+		      //ResultSet'ten verileri cekme
+		      while(rs.next()){
+		         //Sutun adlarini alma
+		         int id  = rs.getInt("Id");
+		         String name = rs.getString("Name");
+		         String lastname = rs.getString("Lastname");
+		         int birthday = rs.getInt("Birthday");         //tablodaki int tipi date olarak degistirelemedi!
+		         String hand = rs.getString("Hand");
+		         String country = rs.getString("Country");
+		         
+		         System.out.println("ID: " + id + ", Name: " + name + ", Lastname: "+ lastname + ", Hand: "+ hand+ ", Birthday: " + birthday + ", Country: " + country);
+		        
+		        
+		      }
+		      rs.close();
+			   }catch(SQLException se){
+			      //JDBC icin hata ayiklama
+			      se.printStackTrace();
+			   }catch(Exception e){
+			      //Class.forName icin hata ayiklama
+			      e.printStackTrace();
+			   }finally{
+		
+				      try{
+				         if(stmt!=null)
+				            conn.close();
+				      }catch(SQLException se){
+				      }
+				      try{
+				         if(conn!=null)
+				            conn.close();
+				      }catch(SQLException se){
+				         se.printStackTrace();
+				      }
+			   	}
+	   }
 }
+
+  
+
+       
