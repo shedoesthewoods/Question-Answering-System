@@ -19,8 +19,8 @@ class Bot{
     }
 
 	/** botun verdiği cevabı yazdıran metod*/
-	void botSay(String str){
-		System.out.println("Bot: " + str +"\n");
+	void botSay(String sentence){
+		System.out.printf("Bot: %s\n", answer(sentence));
 	}
 
     /**keyword kelimeleri dosyadan okuyup arrayliste atan metod*/
@@ -40,9 +40,7 @@ class Bot{
         }
     }
 
-	private
-
-    void regexGenerator(String sentence){
+	private void regexGenerator(String sentence){
         Pattern pattern;
         Matcher matcher;
         for (String word : keywords) {
@@ -56,7 +54,7 @@ class Bot{
     }
 
     /** uygulamanın vereceği cevap seçiminin yapılacağı metod*/
-    String answer(String sentence){
+    private String answer(String sentence){
         regexGenerator(sentence);
         String ans = "";
 
@@ -74,6 +72,9 @@ class Bot{
                 ans="Erkeklerde: Djokovic\nKadinlarda: Serena Williams";
             }
         }
+
+
+
         matchingWords.clear();
         return ans;
     }

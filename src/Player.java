@@ -11,11 +11,11 @@ public class Player {
     private String country;
     private char hand;
 
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     private Date bDate;
 
     //doğum tarihi için hangi class ve yöntem kullanılacak
-    Player(int id, String name, String lastName, char hand,String birthDate, String country){
+    Player(int id, String name, String lastName, char hand, String birthDate, String country){
         this.setId(id);
         this.setName(name);
         this.setLastName(lastName);
@@ -23,7 +23,6 @@ public class Player {
         this.setHand(hand);
         this.setbDate(birthDate);
     }
-
 
     /**getter setter metodlar*/
     String getName() {

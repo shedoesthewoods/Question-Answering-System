@@ -14,20 +14,19 @@ public class Match {
     private int drawSize;
     private Player winner;
     private Player loser;
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
     
     public Match(String tourneyID, String tourneyName, String surface, int drawSize, char tourneyLevel, String tourneyDate,  int matchNum,
-            Player winner, Player loser) {
-            this.setTourneyID(tourneyID);
-            this.setTourneyName(tourneyName);
-            this.setSurface(surface);
-            this.setDrawSize(drawSize);
-            this.setTourneyLevel(tourneyLevel);
-            this.setTourneyDate(tourneyDate);
-            this.setMatchNum(matchNum);
-            this.setWinner(winner);
-            this.setLoser(loser);
-            
+        Player winner, Player loser) {
+        this.setTourneyID(tourneyID);
+        this.setTourneyName(tourneyName);
+        this.setSurface(surface);
+        this.setDrawSize(drawSize);
+        this.setTourneyLevel(tourneyLevel);
+        this.setTourneyDate(tourneyDate);
+        this.setMatchNum(matchNum);
+        this.setWinner(winner);
+        this.setLoser(loser);
     }
 
     public String getTourneyID() {
@@ -105,6 +104,4 @@ public class Match {
     public void setLoser(Player loser) {
         this.loser = loser;
     }
-    
-    
 }

@@ -14,9 +14,10 @@ public class Main {
 
         //kullanıcı çıkış yapmak isteyene kadar uygulamayı açık tutan döngü
         while(girdi.compareTo("0")!=0) {
-            bot.botSay(bot.answer(girdi));
+            bot.botSay(girdi);
             System.out.print("Sormak istediğiniz soru nedir?(Çıkış için 0 girin): ");
             girdi = scanner.nextLine();
         }
     }
 }
+
