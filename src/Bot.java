@@ -10,12 +10,13 @@ import java.util.regex.Pattern;
 class Bot{
     private static ArrayList<String> keywords = new ArrayList<>();
     private ArrayList<String> matchingWords = new ArrayList<>();
-    private ArrayList<String> cinsiyetler = new ArrayList<>();
+    private ArrayList<String> nonMatchingWords = new ArrayList<>();
+    //private ArrayList<String> cinsiyetler = new ArrayList<>();
     private static Scanner scanner = null;
 
     Bot(){
         createKeywords();
-        cinsiyetler.add("kadin"); cinsiyetler.add("erkek");
+        //cinsiyetler.add("kadin"); cinsiyetler.add("erkek");
     }
 
 	/** botun verdiği cevabı yazdıran metod*/
@@ -43,13 +44,20 @@ class Bot{
 	private void regexGenerator(String sentence){
         Pattern pattern;
         Matcher matcher;
-        for (String word : keywords) {
-            pattern = Pattern.compile("^.*(?i)("+ word+ ").*$");
+        for (String word1 : keywords) {
+            pattern = Pattern.compile("^.*(?i)("+ word1+ ").*$");
             matcher = pattern.matcher(sentence);
 
            if(matcher.lookingAt()){
-                matchingWords.add(word);
+                matchingWords.add(word1);
            }
+        }
+
+        String[] splittedSentence =  sentence.split(" ");
+        for(String word2 : splittedSentence){
+            if(!matchingWords.contains(word2)){
+                nonMatchingWords.add(word2);
+            }
         }
     }
 
@@ -58,24 +66,26 @@ class Bot{
         regexGenerator(sentence);
         String ans = "";
 
-        if(matchingWords.contains("en iyi")){
-            if(matchingWords.contains("erkek")){
-                ans="Djokovic";
-            }
-            else if(matchingWords.contains("kadin")){
-                ans="Serena Williams";
-            }
-            else{
-                ans="Erkeklerde: Djokovic\nKadinlarda: Serena Williams";
-            }
-            if(matchingWords.containsAll(cinsiyetler)){
-                ans="Erkeklerde: Djokovic\nKadinlarda: Serena Williams";
-            }
+        String tarih = isDate();
+        if(tarih != null){
+            ans = tarih;
         }
-
-
 
         matchingWords.clear();
         return ans;
+    }
+
+    private String isDate(){
+        Pattern pattern;
+        Matcher matcher;
+        for(String word : nonMatchingWords){
+            pattern = Pattern.compile("(\\d{4}[01]\\d[0-3]\\d)"); //date regex
+            matcher = pattern.matcher(word);
+
+            if(matcher.lookingAt()){
+                return word;
+            }
+        }
+        return "";
     }
 }

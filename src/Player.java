@@ -1,18 +1,12 @@
 package chatbot;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Player {
     private int id;
     private String name;
     private String lastName;
     private String country;
     private char hand;
-
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-    private Date bDate;
+    private String bDate;
 
     //doğum tarihi için hangi class ve yöntem kullanılacak
     Player(int id, String name, String lastName, char hand, String birthDate, String country){
@@ -57,16 +51,12 @@ public class Player {
         this.hand = hand;
     }
 
-    Date getbDate() {
+    String getbDate() {
         return bDate;
     }
 
     void setbDate(String birthDate){
-        try {
-            this.bDate = dateFormat.parse(birthDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        this.bDate = birthDate;
     }
 
     int getId() {
