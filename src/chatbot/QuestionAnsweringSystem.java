@@ -1,8 +1,6 @@
 package chatbot;
 
-import java.util.ArrayList;
-
-class Controller {
+class QuestionAnsweringSystem {
     /** botun verdiği cevabı yazdıran metod*/
     void getSentence(String sentence){
         Question question = new Question(sentence);

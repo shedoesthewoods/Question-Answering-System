@@ -22,8 +22,8 @@ class QuestionPattern {
     void execute(){
         createKeywords();
         regexGenerator();
-        Answer answer = new Answer(matchingWords, question);
-        answer.executeQuery();
+        QueryReader queryReader = new QueryReader(matchingWords, question);
+        queryReader.executeQuery();
     }
 
     /**keyword kelimeleri dosyadan okuyup arrayliste atan metod*/
@@ -39,7 +39,7 @@ class QuestionPattern {
         String read;
         while(scanner.hasNextLine()){
             read = scanner.nextLine();
-            //keywords.add(read);
+            //keywords.add(execute_query);
             keywords.add("^.*(?i)("+ read + ").*$"); //bu böyle olunca matchingWords nasıl oluyor ona bakmalı
         }
     }

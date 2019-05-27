@@ -14,7 +14,7 @@ class ReadDB {
 	private Connection conn = null;
 	private Statement stmt = null;
 
-	void read(String sql) {
+	void execute_query(String sql) {
 		try{
 			//JDBC driver
 			Class.forName(JDBC_DRIVER);
