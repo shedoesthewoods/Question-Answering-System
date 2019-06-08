@@ -1,7 +1,7 @@
 package chatbot;
 
 class QuestionAnsweringSystem {
-    /** botun verdiði cevabý yazdýran metod*/
+    /** botun verdigi cevabi yazdiran metod*/
     void getSentence(String sentence){
         Question question = new Question(sentence);
         question.setQuestion();

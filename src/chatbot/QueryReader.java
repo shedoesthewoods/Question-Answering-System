@@ -14,7 +14,6 @@ class QueryReader {
     private ArrayList<String> isimler;
     private ArrayList<String> ulkeler;
     private ArrayList<String> tarihler;
-    private ArrayList<String> eller;
 
     QueryReader(ArrayList<String> matchingWords, String sentence){
         matching = matchingWords;
@@ -36,13 +35,10 @@ class QueryReader {
         ulkeler.add("ulkesi"); ulkeler.add("ulkesinden"); ulkeler.add("ulke"); ulkeler.add("vatandasi");
         
         tarihler = new ArrayList<>();
-        tarihler.add("tarih"); tarihler.add("tarihi"); tarihler.add("tarihinde"); tarihler.add("tarihli"); 
-        
-        eller = new ArrayList<>();
-        eller.add("elini"); eller.add("saglak"); eller.add("solak");
+        tarihler.add("tarih"); tarihler.add("tarihi"); tarihler.add("tarihinde"); tarihler.add("tarihli");
     }
 
-    /** uygulamanýn vereceði cevap seçiminin yapýlacaðý metod*/
+    /** uygulamanin verecegi cevap seciminin yapilacagi metod*/
     private void create_query(String sentence){
         String select = "SELECT * ";
         String from = "FROM Players";
@@ -50,7 +46,6 @@ class QueryReader {
         String name = null;
         String country = null;
         String date = null;
-        String ans;
         
         String[] splittedSentence =  sentence.split(" ");
         ArrayList<String> splittedSentence2 = new ArrayList<String>(Arrays.asList(splittedSentence));

@@ -22,7 +22,7 @@ class QuestionPattern {
     void execute(){
         createKeywords();
         regexGenerator();
-        QueryReader queryReader = new QueryReader(matchingWords, question);
+        QueryReader queryReader = new QueryReader(getMatchingWords(), question); //burasi deneysel
         queryReader._executeQuery();
     }
 
@@ -32,7 +32,7 @@ class QuestionPattern {
             scanner = new Scanner(new FileInputStream(
                     "C:/Users/4713392981814/git/SADProject/src/keywords.txt"));
         }catch (FileNotFoundException e){
-            System.err.println("Dosya bulunamadý.");
+            System.err.println("Dosya bulunamadï¿½.");
             e.printStackTrace();
         }
 
@@ -40,7 +40,7 @@ class QuestionPattern {
         while(scanner.hasNextLine()){
             read = scanner.nextLine();
             keywords.add(read);
-          //  keywords.add("^.*(?i)("+ read + ").*$"); //bu böyle olunca matchingWords nasýl oluyor ona bakmalý
+          //  keywords.add("^.*(?i)("+ read + ").*$");
         }
     }
 
@@ -54,7 +54,7 @@ class QuestionPattern {
             matcher = pattern.matcher(question);
 
             if(matcher.matches()){
-                matchingWords.add(word); //word yerine cümlede gecen kelime
+                matchingWords.add(word); //word yerine cï¿½mlede gecen kelime
             }
         }
         /*String[] splittedSentence =  sentence.split(" ");
