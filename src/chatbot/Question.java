@@ -1,15 +1,15 @@
 package chatbot;
 
-class Question {
-    private String questionSentence;
-    private QuestionPattern pattern;
+public class Question {
+	 private String questionSentence;
+	    private QuestionPattern pattern;
 
-    Question(String sentence){
-        questionSentence = sentence;
-    }
+	    Question(String sentence){
+	        questionSentence = sentence;
+	    }
 
-    void setQuestion(){
-        pattern = new QuestionPattern(questionSentence);
-        pattern.execute();
-    }
+	    void setQuestion(){
+	        pattern = new QuestionPattern(questionSentence);
+	        pattern.execute();
+	    }
 }

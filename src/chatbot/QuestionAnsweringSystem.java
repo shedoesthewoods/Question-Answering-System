@@ -1,7 +1,7 @@
 package chatbot;
 
 class QuestionAnsweringSystem {
-    /** botun verdiÄŸi cevabÄ± yazdÄ±ran metod*/
+    /** botun verdiði cevabý yazdýran metod*/
     void getSentence(String sentence){
         Question question = new Question(sentence);
         question.setQuestion();
@@ -13,7 +13,6 @@ class QuestionAnsweringSystem {
         for(String word : nonMatchingWords){
             pattern = QuestionPattern.compile("(\\d{4}[01]\\d[0-3]\\d)"); //date regex
             matcher = pattern.matcher(word);
-
             if(matcher.lookingAt()){
                 return word;
             }

@@ -4,19 +4,22 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // QuestionAnsweringSystem sÄ±nÄ±fÄ±nda yazÄ±lan metodlar questionAnsweringSystem deÄŸiÅŸkeni Ã¼zerinden Ã§alÄ±ÅŸtÄ±rÄ±lacak
-        QuestionAnsweringSystem questionAnsweringSystem = new QuestionAnsweringSystem();
+    	
+            // QuestionAnsweringSystem sýnýfýnda yazýlan metodlar questionAnsweringSystem deðiþkeni üzerinden çalýþtýrýlacak
+    	    QuestionAnsweringSystem questionAnsweringSystem = new QuestionAnsweringSystem();
 
-        // konsoldan okumalar
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Sormak istediÄŸiniz soru nedir?(Ã‡Ä±kÄ±ÅŸ iÃ§in 0 girin): ");
-        String girdi = scanner.nextLine(); //nextLine yerine next metodu kullanÄ±ldÄ±ÄŸÄ±nda uygulama bozuluyor
+            // konsoldan okumalar
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Sormak istediðiniz soru nedir?(Çýkýþ için 0 girin): ");
+            String girdi = scanner.nextLine(); //nextLine yerine next metodu kullanýldýðýnda uygulama bozuluyor
 
-        //kullanÄ±cÄ± Ã§Ä±kÄ±ÅŸ yapmak isteyene kadar uygulamayÄ± aÃ§Ä±k tutan dÃ¶ngÃ¼
-        while(girdi.compareTo("0")!=0) {
-            questionAnsweringSystem.getSentence(girdi);
-            System.out.print("Sormak istediÄŸiniz soru nedir?(Ã‡Ä±kÄ±ÅŸ iÃ§in 0 girin): ");
-            girdi = scanner.nextLine();
-        }
+            //kullanýcý çýkýþ yapmak isteyene kadar uygulamayý açýk tutan döngü
+            while(girdi.compareTo("0")!=0) {
+                questionAnsweringSystem.getSentence(girdi);
+                System.out.print("Sormak istediðiniz soru nedir?(Çýkýþ için 0 girin): ");
+                girdi = scanner.nextLine();
+            }
+       
     }
+    
 }

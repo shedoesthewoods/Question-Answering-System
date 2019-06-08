@@ -23,24 +23,24 @@ class QuestionPattern {
         createKeywords();
         regexGenerator();
         QueryReader queryReader = new QueryReader(matchingWords, question);
-        queryReader.executeQuery();
+        queryReader._executeQuery();
     }
 
     /**keyword kelimeleri dosyadan okuyup arrayliste atan metod*/
     private void createKeywords(){
         try {
             scanner = new Scanner(new FileInputStream(
-                    "C:/Users/4713392981814/git/QuestionAnswering2/src/keywords.txt"));
+                    "C:/Users/4713392981814/git/SADProject/src/keywords.txt"));
         }catch (FileNotFoundException e){
-            System.err.println("Dosya bulunamadÄ±.");
+            System.err.println("Dosya bulunamadý.");
             e.printStackTrace();
         }
 
         String read;
         while(scanner.hasNextLine()){
             read = scanner.nextLine();
-            //keywords.add(execute_query);
-            keywords.add("^.*(?i)("+ read + ").*$"); //bu bÃ¶yle olunca matchingWords nasÄ±l oluyor ona bakmalÄ±
+            keywords.add(read);
+          //  keywords.add("^.*(?i)("+ read + ").*$"); //bu böyle olunca matchingWords nasýl oluyor ona bakmalý
         }
     }
 
@@ -49,12 +49,12 @@ class QuestionPattern {
         Pattern pattern;
         Matcher matcher;
         for (String word : keywords) {
-            //pattern = Pattern.compile("^.*(?i)("+ word+ ").*$");
-            pattern = Pattern.compile(word);
+            pattern = Pattern.compile("^.*(?i)("+ word+ ").*$");
+      //      pattern = Pattern.compile(word);
             matcher = pattern.matcher(question);
 
             if(matcher.matches()){
-                matchingWords.add(word); //word yerine cÃ¼mlede gecen kelime
+                matchingWords.add(word); //word yerine cümlede gecen kelime
             }
         }
         /*String[] splittedSentence =  sentence.split(" ");
